@@ -1,3 +1,5 @@
+mod custom_fn;
+mod email;
 mod ends_with;
 mod lowercase;
 mod main_struct;

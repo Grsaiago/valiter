@@ -2,9 +2,10 @@ use crate::{
     And, Validator,
     base_structs::AlwaysValid,
     validators::string::{
-        ends_with::EndsWithStringValidator, lowercase::LowercaseStringValidator,
-        max::MaxLenStringValidator, min::MinLenStringValidator,
-        starts_with::StartsWithStringValidator, uppercase::UppercaseStringValidator,
+        custom_fn::FnStringValidator, ends_with::EndsWithStringValidator,
+        lowercase::LowercaseStringValidator, max::MaxLenStringValidator,
+        min::MinLenStringValidator, starts_with::StartsWithStringValidator,
+        uppercase::UppercaseStringValidator,
     },
 };
 
@@ -75,6 +76,16 @@ where
     ) -> StringValidator<And<V, EndsWithStringValidator>> {
         StringValidator {
             inner: And::new(self.inner, EndsWithStringValidator::new(pattern.as_ref())),
+        }
+    }
+
+    pub fn with_func<F, P>(self, func: F) -> StringValidator<And<V, FnStringValidator<F>>>
+    where
+        F: Fn(&str) -> Result<(), ()>,
+        P: AsRef<str>,
+    {
+        StringValidator {
+            inner: And::new(self.inner, FnStringValidator::new(func)),
         }
     }
 }
