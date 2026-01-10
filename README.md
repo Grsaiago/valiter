@@ -18,6 +18,7 @@ Basic validations:
 - [x] endsWith
 - [x] uppercase
 - [x] lowercase
+- [x] with custom function
 - [ ] includes
 - [ ] regex (feature gated?)
 
