@@ -2,10 +2,10 @@ use crate::{
     And, Validator,
     base_structs::AlwaysValid,
     validators::string::{
-        custom_fn::FnStringValidator, ends_with::EndsWithStringValidator,
-        lowercase::LowercaseStringValidator, max::MaxLenStringValidator,
-        min::MinLenStringValidator, starts_with::StartsWithStringValidator,
-        uppercase::UppercaseStringValidator,
+        custom_fn::FnStringValidator, email::EmailStringValidator,
+        ends_with::EndsWithStringValidator, lowercase::LowercaseStringValidator,
+        max::MaxLenStringValidator, min::MinLenStringValidator,
+        starts_with::StartsWithStringValidator, uppercase::UppercaseStringValidator,
     },
 };
 
@@ -76,6 +76,12 @@ where
     ) -> StringValidator<And<V, EndsWithStringValidator>> {
         StringValidator {
             inner: And::new(self.inner, EndsWithStringValidator::new(pattern.as_ref())),
+        }
+    }
+
+    pub fn email(self) -> StringValidator<And<V, EmailStringValidator>> {
+        StringValidator {
+            inner: And::new(self.inner, EmailStringValidator::new()),
         }
     }
 

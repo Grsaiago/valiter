@@ -4,10 +4,18 @@ use regex::Regex;
 pub struct EmailStringValidator {
     expression: Regex,
 }
-// impl EmailStringValidator {
-//     #[inline]
-//     pub fn new()
-// }
+
+impl EmailStringValidator {
+    #[inline]
+    pub fn new() -> Self {
+        // SAFETY: The regex is valid xD
+        Self {
+            expression: Regex::new(
+                r"/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/",
+            ).unwrap(),
+        }
+    }
+}
 
 impl<T> Validator<T> for EmailStringValidator
 where
