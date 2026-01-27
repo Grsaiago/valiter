@@ -6,6 +6,7 @@ use crate::{
         ends_with::EndsWithStringValidator, lowercase::LowercaseStringValidator,
         max::MaxLenStringValidator, min::MinLenStringValidator,
         starts_with::StartsWithStringValidator, uppercase::UppercaseStringValidator,
+        uuid::UuidStringValidator,
     },
 };
 
@@ -82,6 +83,12 @@ where
     pub fn email(self) -> StringValidator<And<V, EmailStringValidator>> {
         StringValidator {
             inner: And::new(self.inner, EmailStringValidator::new()),
+        }
+    }
+
+    pub fn uuid(self) -> StringValidator<And<V, UuidStringValidator>> {
+        StringValidator {
+            inner: And::new(self.inner, UuidStringValidator::new()),
         }
     }
 
