@@ -23,7 +23,7 @@ Basic validations:
 - [ ] regex (feature gated?)
 
 Format validations:
-- [ ] email
+- [x] email
 - [ ] uuid
 - [ ] url
 - [ ] httpUrl       // http or https URLs only
